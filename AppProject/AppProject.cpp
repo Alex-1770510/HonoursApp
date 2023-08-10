@@ -2,41 +2,82 @@
 //
 
 #include <iostream>
+#include <string>
+#include <windows.h>
+
+
+std::wstring ExePath() {
+    TCHAR buffer[MAX_PATH] = { 0 };
+    GetModuleFileName(NULL, buffer, MAX_PATH);
+    std::wstring::size_type pos = std::wstring(buffer).find_last_of(L"\\/");
+    return std::wstring(buffer).substr(0, pos);
+}
 
 void diagnoseECG() {
+    system("cls");
+    std::cout << "Diagnose ECG\n";
+    std::wstring epath = ExePath();
+    std::wcout << "Your directory is " << epath << "\n";
+    std::cout << "Please provide the address of your ECG png\n";
+    std::cout << "\nType '...' to return\n";
 
+    std::string n = " ";
+    std::cin >> n;
+    if (n == "...") {
+        system("cls");
+        return;
+    }
 }
 
 void signUp() {
+    system("cls");
+    std::cout << "Sign Up\n";
 
+    std::cout << "\nType '...' to return\n";
+    std::string n = " ";
+    std::cin >> n;
+    if (n == "...") {
+        system("cls");
+        return;
+    }
 }
 
 void logIn() {
+    system("cls");
+    std::cout << "Login\n";
 
+    std::cout << "\nType '...' to return\n";
+    std::string n = " ";
+    std::cin >> n;
+    if (n == "...") {
+        system("cls");
+        return;
+    }
 }
+
 
 int main()
 {
-    std::cout << "Welcome to ECG Analaysis App\n";
-    std::cout << "Select your option by typing in the number;\n";
-    std::cout << "1. Diagnose ECG    2. SignUp    3. LogIn\n";
+    while (true) {
+        std::cout << "Welcome to ECG Analaysis App\n";
+        std::cout << "Select your option by typing in the number;\n";
+        std::cout << "1. Diagnose ECG    2. SignUp    3. LogIn\n";
 
-    int n = 0;
-    int check = 0;
-    while (check == 0) {
+        std::string n = "";
         std::cin >> n;
         std::cout << "You chose " << n << "\n";
-        if (n == 1) {
+        if (n == "1") {
             diagnoseECG();
         }
-        else if (n == 2) {
+        else if (n == "2") {
             signUp();
         }
-        else if (n == 3) {
+        else if (n == "3") {
             logIn();
         }
         else {
-            std::cout << "number not recognised, please try again\n";
+
+            std::cout << "\nInput number not recognised, please try again...\n\n";
         }
     }
     
